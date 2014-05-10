@@ -56,6 +56,7 @@ app.get('/get-comment', function(req,res){
   db.collection("Comments-" + req.query.mgid).find().sort({'position':-1}).toArray(function(err, docs){
     console.log("Commets-" + req.query.mgid);
     var json = JSON.stringify(docs);;
+    res.header("Content-Type", "application/json");
     res.send(json);
   });
 });

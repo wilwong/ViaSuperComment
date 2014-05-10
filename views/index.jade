@@ -1,26 +1,33 @@
 extends layout
 
 block content
-  .frame
-      .player(data-contenturi='mgid:cms:video:nick.com:920786')
-        .thumbnails-container
-          .cursor +
-      .comment-containers
-        .comment-box-buffer
-          img
-          .user
-            .name
-            | at
-            a.position
-          .text
-        .comment-box
+  .container
+      .frame
+          .player(data-contenturi='mgid:cms:video:nick.com:920786')
+          .thumbnails-container
+            .progress
+            .cursor +
+            .thumb-indicator
+          .comment-containers
+            .comment-box-buffer
+              img
+              .comment-content
+                .user
+                  a.name
+                  | at
+                  a.position(href='#')
+                .text
+            .comment-box
+          .comment-form
+            img
+            .comment-content
+              div
+                | Comment at
+                a.new-comment-position 1:10
+              form#comment
+                input(placeholder='Leave your contextual comment here')
+                button Share
 
-
-  form#comment
-    input(placeholder="comment")
-
-  button#getdb
-    | GET COMMENTS
   script.
     $("#comment").submit(function(){
       console.log("posting");
@@ -30,7 +37,7 @@ block content
           posted: (new Date()).getTime(),
           fbid: 1234,
           name: 'hello',   
-          position: 0,
+          position: app.newCommentPosition/10.0,
           text: $(this).children("input").val()
       };
       console.log(data);
@@ -41,7 +48,7 @@ block content
         data:data,
         success:function (res)
         {
-            //resHandler(res);
+            $("#comment input").html("Posted");
         }
       });
     });

@@ -1,8 +1,18 @@
 * { box-sizing: border-box }
 
 body {
-	background-image: url('img/noise.png') ;
+	background-image: url('/images/noise.png') ;
 	background-size: cover;
+	font-family: Helvetica;	
+}
+
+a {
+	color: #115268;
+	text-decoration: none;
+}
+
+::-webkit-input-placeholder {
+	color: #333 !important;
 }
 
 .container {
@@ -12,7 +22,7 @@ body {
 	left: 50%;
 	top: 50%;
 	margin: -300px 0 0 -400px;
-	background-image: url('img/noise.png') ;
+	background-image: url('/images/noise.png') ;
 	background-size: cover;
 }
 
@@ -21,34 +31,79 @@ body {
 }
 
 .thumbnails-container {
-	height: 23px;
+	height: 31px;
 	cursor: none;
 	background-color: rgba(0,0,0,0.50);
 	padding: 4px 0 4px 0;
 }
 
+
 .thumbnails-container .cursor {
 	color: #fff;
-	position:absolute;
+	position: absolute;
 	display: none;
+}
+
+.thumbnails-container .progress {
+	box-shadow: 0px -2px 5px 0px #115268;
+	background-color: #115268;
+	position: relative;
+	height: 4px;
+	top: 25px;
+	width: 0px;
+	z-index: 4;
 }
 
 .thumbnails-container:hover .cursor {
 	display: block;
+	margin-left: -70px;
 }
 
 .thumbnails-container .comment-thumbnail {
-	position: relative;
-	height: 15px;
-	width: 15px;
+	position: absolute;
+	height: 25px;
+	width: 25px;
 	cursor: pointer;
 	z-index: 2;
+	margin-top: -20px;
 }
 
-.comment-box, .comment-box-buffer {
+.thumbnails-container .thumb-indicator {
+	width: 0; 
+	height: 0;
+	position: relative;
+	border-right: 24px solid transparent;
+	border-bottom: 17px solid #115268;
+	top: 8px;
+	margin-left: -6px;
+	z-index: 4;
+	visibility: hidden;
+}
+
+.comment-box, .comment-box-buffer, .comment-form {
 	display: none;
 	position: absolute;
 	background-color: #000;
 	color: #fff;
-	width: 300px;
+	width: 780px;
+	margin-top: 2px;
+	border-top: 4px solid #115268;
+}
+
+.comment-box img, .comment-box-buffer img, .comment-form img {
+	float: left;
+	margin: 4px;
+}
+
+.comment-box div, .comment-box-buffer div, .comment-form div {
+	margin: 4px 4px 4px 10px;
+}
+
+input {
+	width: 600;
+	background-color: black;
+	border: none;
+	border-bottom: 1px solid #333;
+	color: #ccc;
+	font-size: 2em;
 }
