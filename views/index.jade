@@ -1,8 +1,20 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .frame
+      .player(data-contenturi='mgid:cms:video:nick.com:920786')
+        .thumbnails-container
+          .cursor +
+      .comment-containers
+        .comment-box-buffer
+          img
+          .user
+            .name
+            | at
+            a.position
+          .text
+        .comment-box
+
 
   form#comment
     input(placeholder="comment")

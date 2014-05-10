@@ -1,0 +1,54 @@
+* { box-sizing: border-box }
+
+body {
+	background-image: url('img/noise.png') ;
+	background-size: cover;
+}
+
+.container {
+	width: 800px;
+	height: 600px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -300px 0 0 -400px;
+	background-image: url('img/noise.png') ;
+	background-size: cover;
+}
+
+.frame {
+	padding: 10px;
+}
+
+.thumbnails-container {
+	height: 23px;
+	cursor: none;
+	background-color: rgba(0,0,0,0.50);
+	padding: 4px 0 4px 0;
+}
+
+.thumbnails-container .cursor {
+	color: #fff;
+	position:absolute;
+	display: none;
+}
+
+.thumbnails-container:hover .cursor {
+	display: block;
+}
+
+.thumbnails-container .comment-thumbnail {
+	position: relative;
+	height: 15px;
+	width: 15px;
+	cursor: pointer;
+	z-index: 2;
+}
+
+.comment-box, .comment-box-buffer {
+	display: none;
+	position: absolute;
+	background-color: #000;
+	color: #fff;
+	width: 300px;
+}

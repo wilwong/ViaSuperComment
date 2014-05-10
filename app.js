@@ -52,10 +52,10 @@ app.post('/post-comment', function(req, res) {
 });
 
 app.get('/get-comment', function(req,res){
-  console.log("Commets-" + req.query.mgid);
-  db.collection("Comments-" + req.query.mgid).find().toArray(function(err, docs){
-    var json = JSON.stringify(docs);
-    console.log(json);
+  
+  db.collection("Comments-" + req.query.mgid).find().sort({'position':-1}).toArray(function(err, docs){
+    console.log("Commets-" + req.query.mgid);
+    var json = JSON.stringify(docs);;
     res.send(json);
   });
 });
