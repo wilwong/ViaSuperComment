@@ -2,7 +2,7 @@ doctype html
 html
   head
     title= title
-    //- link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/claudio.css')
     script(src="/javascripts/jquery-2.1.0.min.js")
     //- script(src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js")
@@ -11,8 +11,9 @@ html
     script(src="/javascripts/mtvapi.min.js")
     script(src="/javascripts/main.js")
   body
+  .container
     form#search.form-group
       input.form-control(type="text", placeholder="Search")
     block content
-    footer
-      script(src="javascripts/hack.js")
+  footer
+    script(src="javascripts/hack.js")

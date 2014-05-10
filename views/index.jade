@@ -1,32 +1,32 @@
 extends layout
 
 block content
-  .container
-      .frame
-          .player(data-contenturi='mgid:cms:video:nick.com:920786')
-          .thumbnails-container
-            .progress
-            .cursor +
-            .thumb-indicator
-          .comment-containers
-            .comment-box-buffer
-              img
-              .comment-content
-                .user
-                  a.name
-                  | at
-                  a.position(href='#')
-                .text
-            .comment-box
-          .comment-form
-            img
-            .comment-content
-              div
-                | Comment at
-                a.new-comment-position 1:10
-              form#comment
-                input(placeholder='Leave your contextual comment here')
-                button Share
+  .frame
+      .player(data-contenturi='mgid:cms:video:nick.com:920786')
+      .thumbnails-container
+        .progress
+        .cursor +
+        .thumb-indicator
+      .comment-containers
+        .comment-box-buffer
+          img
+          .comment-content
+            .user
+              a.name
+              | at
+              a.position(href='#')
+            .text
+        .comment-box
+      .comment-form
+        img
+        .comment-content
+          div
+            | Comment at
+            a.new-comment-position 1:10
+          form#comment
+            input(placeholder='Leave your contextual comment here')
+            .post.button Post
+            .share.button Share
 
   script.
     $("#comment").submit(function(){
