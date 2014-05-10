@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  form#comment
+    input(placeholder="comment")
+
+  button#getdb
+    | GET COMMENTS
+  script.
+    $("#comment").submit(function(){
+      console.log("posting");
+      event.preventDefault();
+      var data = {
+          mgid: "test",
+          posted: (new Date()).getTime(),
+          fbid: 1234,
+          name: 'hello',   
+          position: 0,
+          text: $(this).children("input").val()
+      };
+      console.log(data);
+      $.ajax({
+        url:"/post-comment",
+        type:"POST",
+        dataType: 'json',
+        data:data,
+        success:function (res)
+        {
+            //resHandler(res);
+        }
+      });
+    });
+
+    $("#getdb").click(function(){
+      console.log("trying to get");
+      $.ajax({
+        dataType: "json",
+        type: "GET",
+        url: "/get-comment?mgid="+"test",
+        success: function(res){
+          console.log(res);
+        }
+      });
+    });
