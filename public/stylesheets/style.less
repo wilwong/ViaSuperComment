@@ -8,15 +8,34 @@ a {
 }
 
 .new-comment-position{
-	margin-left: 10px;
+	margin-left: 5px;
 }
 
 #comment div{
 	display: inline-block;
 }
-
+#logo{
+	background-image: url('/images/whitefulllogo.png');
+	width: 204px;
+	display: inline-block;
+	height: 36px;
+}	
 #search{
-	float: right;
-	margin-right: 10px;
-	margin-botton: 10px;
+	input{
+		width: 500px;
+	}
+	display: inline-block;
+	margin-left: 85px;
+
+}
+
+.button-post{
+	font-size: 2em;
+	padding: 0.2em 0.7em;
+	margin-left: 5px;
+	&:hover{
+		background-color: white;
+		color: black;
+		transition: 0.7s;
+	}
 }
