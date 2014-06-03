@@ -54,9 +54,22 @@ a {
 	z-index: 4;
 }
 
-.thumbnails-container:hover .cursor {
+.thumbnails-container .cursor {
 	display: block;
-	margin-left: -70px;
+	margin-left: 750px;
+    border-radius: 50%;
+
+    width: 26px;
+    height: 26px;
+    padding: 3px;
+    margin-top: -5px;
+    cursor: pointer;
+    /*background: #115268;
+    border: 2px solid #115268;
+    color: #fff;
+    text-align: center;*/
+    background-image: url('/images/circlelogo.png');
+    background-size: cover;
 }
 
 .thumbnails-container .comment-thumbnail {
@@ -100,7 +113,7 @@ a {
 }
 
 input {
-	width: 600px;
+	width: 590px;
 	background-color: black;
 	border: none;
 	border-bottom: 1px solid #333;

@@ -5,7 +5,7 @@ block content
       .player(data-contenturi='mgid:cms:video:nick.com:920786')
       .thumbnails-container
         .progress
-        .cursor +
+        .cursor
         .thumb-indicator
       .comment-containers
         .comment-box-buffer
@@ -28,17 +28,22 @@ block content
             .button-post Post
 
   script.
-    $("#comment").submit(function(){
+    $(".button-post").click(function(){
       console.log("posting");
       event.preventDefault();
       var data = {
           mgid: "test",
           posted: (new Date()).getTime(),
-          fbid: 1234,
-          name: 'hello',   
-          position: app.newCommentPosition/10.0,
+          fbid: app.userId,
+          name: 'Claudio Brandolino',   
+          position: app.newCommentPosition,
           text: $(this).children("input").val()
       };
+      app.appendComment(_.extend(data, {_id: 1}))
+      $('.comment-containers').show()
+      $('.comment-form').hide()
+            app.showComment(1)
+
       console.log(data);
       $.ajax({
         url:"/post-comment",
@@ -50,6 +55,50 @@ block content
             $("#comment input").html("Posted");
         }
       });
+    });
+
+    $("#comment").submit(function(){
+      console.log("posting");
+      event.preventDefault();
+      var data = {
+          mgid: "test",
+          posted: (new Date()).getTime(),
+          fbid: app.userId,
+          name: 'Claudio Brandolino',   
+          position: app.newCommentPosition,
+          text: $(this).children("input").val()
+      };
+      app.appendComment(_.extend(data, {_id: 1}))
+      app.comments.push(_.extend(data, {_id: 1}))
+      $('.comment-containers').show()
+      $('.comment-form').hide()
+      app.showComment(1)
+
+      console.log(data);
+      $.ajax({
+        url:"/post-comment",
+        type:"POST",
+        dataType: 'json',
+        data:data,
+        success:function (res)
+        {
+            $("#comment input").html("Posted");
+        }
+      });
+        // call the API
+        var obj = {
+          method: 'feed',
+          link: 'http://localhost.mtv.de:3000#' + 1,
+          name: 'Claudio commented on ' + app.niceTime(app.newCommentPosition),
+          caption: data.text,
+        };
+
+        function callback(response) {
+          console.log(response);
+        }
+
+        FB.ui(obj, callback);
+
     });
 
     $("#getdb").click(function(){

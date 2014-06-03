@@ -23,7 +23,7 @@ app.showComment = function(id) {
 }
 
 app.niceTime = function(seconds) {
-	return Math.round(seconds / 60) + ':' + (seconds % 60)
+	return Math.round(seconds / 60) + ':' + parseInt((seconds % 60))
 }
 
 app.initCommentThumbnails = function(response) {
@@ -32,6 +32,7 @@ app.initCommentThumbnails = function(response) {
 	$('.thumbnails-container .comment-thumbnail').remove()
 	app.comments = response
 	app.comments.forEach(function(comment){
+		app.appendComment(comment)
 		var offset = $('.thumbnails-container').width() * (comment.position / app.player.currentMetadata.duration)
 		var thumb = $('<img class="comment-thumbnail">')
 		thumb.attr('src', 'http://graph.facebook.com/' + comment.fbid + '/picture')
@@ -43,9 +44,6 @@ app.initCommentThumbnails = function(response) {
 	$('.thumbnails-container img').hover(function(e) {
 		if (e.type == 'mouseenter') {
 			app.showComment($(e.target).attr('data-comment-id'))
-			$('.cursor').hide();
-		}else{
-			$('.cursor').show();
 		}
 	})
 	$('.thumbnails-container img').click(function(e) {
@@ -53,22 +51,24 @@ app.initCommentThumbnails = function(response) {
 	})
 }
 
-app.initTimelineCursor = function() {
-	$('.thumbnails-container').mousemove(function(e) {
-		$('.cursor').css('left', e.offsetX + 80 );
-	})
+app.appendComment = function(comment){
+	var offset = $('.thumbnails-container').width() * (comment.position / app.player.currentMetadata.duration)
+	var thumb = $('<img class="comment-thumbnail">')
+	thumb.attr('src', 'http://graph.facebook.com/' + comment.fbid + '/picture')
+	thumb.attr('data-comment-id', comment._id)
+	thumb.attr('data-position', comment.position)
+	thumb.css('left', offset)
+	$('.thumbnails-container').append(thumb)
 }
-
 app.initAddCommentFunctionality = function() {
-	$('.thumbnails-container').click(app.addComment)
+	$('.cursor').click(app.addComment)
 }
 
 app.addComment = function() {
 	$('.comment-containers').hide()
 	$('.comment-form').show()
-	var cursorPositionRatio = parseInt($('.cursor').css('left')) / $('.thumbnails-container').width()
-	app.newCommentPosition = parseInt(app.player.currentMetadata.duration * cursorPositionRatio)
-	$('.new-comment-position').text(app.niceTime(app.newCommentPosition))
+	app.newCommentPosition = app.player.playhead
+	$('.new-comment-position').text(app.niceTime(app.player.playhead))
 }
 
 app.initialize = function() {
@@ -76,7 +76,6 @@ app.initialize = function() {
 	app.player.play()
 	app.player.seek(startingTime)
 	app.initCommentThumbnails()
-	app.initTimelineCursor()
 	app.initAddCommentFunctionality()
 }
 
@@ -103,13 +102,12 @@ window.fbAsyncInit = function() {
 	  status	 : true,
 	  version    : 'v2.0'
 	});
-	FB.getLoginStatus(function(response) {
 	    FB.login(function(){
 	    	FB.api('/me', 'GET', function(result) {
+	    		app.userId = result.id
 	    		$('.comment-form img').attr('src', 'http://graph.facebook.com/' + result.id + '/picture')
 	    	})
 	    }, {scope: 'publish_actions'});
-	});
 };
 
 (function(d, s, id){
